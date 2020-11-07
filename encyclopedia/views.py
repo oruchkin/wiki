@@ -10,5 +10,5 @@ def index(request):
 
 def wikititle(request, title):
     return render(request, "encyclopedia/wiki.html", {
-        "entry": util.get_entry(title)    
+        "entryname": util.get_entry(title)    
     })
