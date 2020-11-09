@@ -1,5 +1,8 @@
 from django.shortcuts import render
 
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
 from . import util
 
 
@@ -12,3 +15,10 @@ def wikititle(request, title):
     return render(request, "encyclopedia/wiki.html", {
         "entryname": util.get_entry(title)    
     })
+
+
+def search(request):
+    query = request.GET('q')  # returns None if q not in GET
+    if util.get_entry(query):
+        return HttpResponseRedirect(reverse("entryname", args=(query,)))
+
