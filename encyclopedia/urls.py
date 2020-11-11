@@ -2,7 +2,7 @@ from django.urls import path
 
 from . import views
 
-app_name = "ecylcopedia"
+
 
 urlpatterns = [
     path("", views.index, name="index"),
