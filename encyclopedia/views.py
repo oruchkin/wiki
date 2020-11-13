@@ -29,7 +29,6 @@ def search(request):
 
 def newpage(request):
     return render(request, "encyclopedia/newpage.html")
-<<<<<<< HEAD
 
 
 def save_page(request, title=None):
@@ -47,7 +46,7 @@ def save_page(request, title=None):
                     "error_message": "An entry with that title already exists! Please change the title and try again."
                 })
 
-        filename = wiki_entries_directory + title + ".md"
+        filename = "/entries/" + title + ".md"
         with open(filename, "w") as f:
             f.write(entry_content)
         return HttpResponseRedirect(reverse("wikititle", args=(title,)))
@@ -64,5 +63,3 @@ def edit_page(request, title):
         'edit_page_title': title,
         'edit_page_contents': entry_contents
     })
-=======
->>>>>>> parent of dcdeaed... newpage save
