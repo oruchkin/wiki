@@ -5,6 +5,7 @@ from django.urls import reverse
 
 from . import util
 
+wiki_entries_directory = "entries/"
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
@@ -29,3 +30,37 @@ def search(request):
 
 def newpage(request):
     return render(request, "encyclopedia/newpage.html")
+
+
+def save_page(request, title=None):
+    if request.method == 'GET':
+        return HttpResponseRedirect(reverse("index"))
+    else:
+        assert (request.method == 'POST')
+        entry_content = request.POST['entry-content']
+        if not title:
+            # We are saving a new page
+            title = request.POST['title']
+            if title.lower() in [entry.lower() for entry in util.list_entries()]:
+                return render(request, "encyclopedia/error.html", {
+                    "error_title": "saving page",
+                    "error_message": "An entry with that title already exists! Please change the title and try again."
+                })
+
+        filename = wiki_entries_directory + title + ".md"
+        with open(filename, "w") as f:
+            f.write(entry_content)
+        return HttpResponseRedirect(reverse("entry", args=(title,)))
+
+
+def edit_page(request, title):
+    entry_contents = util.get_entry(title)
+    if entry_contents is None:
+        # Somebody came to a url for editing a  page that does not exist
+        return HttpResponseRedirect(reverse("index"))
+
+    return render(request, "encyclopedia/new-page.html", {
+        'edit_mode': True,
+        'edit_page_title': title,
+        'edit_page_contents': entry_contents
+    })
