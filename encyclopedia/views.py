@@ -47,10 +47,10 @@ def save_page(request, title=None):
                     "error_message": "An entry with that title already exists! Please change the title and try again."
                 })
 
-        filename = "entries/" + title + ".md"
+        filename = wiki_entries_directory + title + ".md"
         with open(filename, "w") as f:
             f.write(entry_content)
-        return HttpResponseRedirect(reverse("wikititle", args=(title,)))
+        return HttpResponseRedirect(reverse("entry", args=(title,)))
 
 
 def edit_page(request, title):
