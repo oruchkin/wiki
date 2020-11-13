@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+<<<<<<< HEAD
     <h1>Create a New Page</h1>
     <form class="container" action={% if edit_mode %} "{% url 'save edited page' edit_page_title %}" {% else %} "
         {% url 'save_page' %}" {% endif %} method="post">
@@ -39,6 +40,17 @@
 
 
 
+=======
+    <h1>Create New Page</h1>
+
+    <form>
+        <input type="text" placeholder="title" name="newtitle">
+        <br>
+        <br>
+        <input type="text" placeholder="description" name="newdescription">
+        <input type="submit">
+>>>>>>> parent of 77ae1c9... 41
     </form>
+
 {% endblock %}
 
