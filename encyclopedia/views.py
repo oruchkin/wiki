@@ -5,7 +5,6 @@ from django.urls import reverse
 
 from . import util
 
-wiki_entries_directory = "entries/"
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
@@ -30,6 +29,7 @@ def search(request):
 
 def newpage(request):
     return render(request, "encyclopedia/newpage.html")
+<<<<<<< HEAD
 
 
 def save_page(request, title=None):
@@ -64,3 +64,5 @@ def edit_page(request, title):
         'edit_page_title': title,
         'edit_page_contents': entry_contents
     })
+=======
+>>>>>>> parent of dcdeaed... newpage save
