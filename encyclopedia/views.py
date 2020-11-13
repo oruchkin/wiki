@@ -50,7 +50,7 @@ def save_page(request, title=None):
         filename = wiki_entries_directory + title + ".md"
         with open(filename, "w") as f:
             f.write(entry_content)
-        return HttpResponseRedirect(reverse("entry", args=(title,)))
+        return HttpResponseRedirect(reverse("wikititle", args=(title,)))
 
 
 def edit_page(request, title):

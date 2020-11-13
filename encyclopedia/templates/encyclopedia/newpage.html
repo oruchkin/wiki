@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <h1>{% if edit_mode %} Edit Page: {{ edit_page_title }} {% else %} Create a New Page {% endif %}</h1>
+    <h1>Create a New Page</h1>
     <form class="container" action={% if edit_mode %} "{% url 'save edited page' edit_page_title %}" {% else %} "
         {% url 'save_page' %}" {% endif %} method="post">
         {% csrf_token %}
