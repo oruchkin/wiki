@@ -21,7 +21,7 @@ def wikititle(request, title):
 def search(request):
     query = request.GET['q']  # returns None if q not in GET
     if util.get_entry(query):
-        return HttpResponseRedirect(reverse("wikititle ", args=(query,)))
+        return HttpResponseRedirect(reverse("wikititle", args=(query,)))
     else:
         return render(request, "encyclopedia/index.html", {
             "entries": [wikititle for wikititle in util.list_entries() if query.lower() in wikititle.lower()],
