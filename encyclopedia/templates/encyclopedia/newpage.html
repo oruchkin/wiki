@@ -6,7 +6,7 @@
 
 {% block body %}
     <h1>Create a New Page</h1>
-    <form class="container" action={% if edit_mode %} "{% url 'save edited page' edit_page_title %}" {% else %} "
+    <form class="container" action={% if false %} "{% url 'save edited page' edit_page_title %}" {% else %} "
         {% url 'save_page' %}" {% endif %} method="post">
         {% csrf_token %}
         <div id="entry-title-section" class="row">

@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 from . import util
+import random
 
 
 def index(request):
@@ -41,14 +42,12 @@ def save_page(request, title=None):
             # We are saving a new page
             title = request.POST['title']
             if title.lower() in [entry.lower() for entry in util.list_entries()]:
-                return render(request, "encyclopedia/error.html", {
-                    "error_title": "saving page",
-                    "error_message": "An entry with that title already exists! Please change the title and try again."
-                })
+                return render(request, "encyclopedia/error.html", 
+                )
 
         filename = "entries/" + title + ".md"
-        with open(filename, "w") as f:
-            f.write(entry_content)
+        with open(filename, "w") as file:
+            file.write(entry_content)
         return HttpResponseRedirect(reverse("wikititle", args=(title,)))
 
 
@@ -63,3 +62,7 @@ def edit_page(request, title):
         'edit_page_title': title,
         'edit_page_contents': entry_contents
     })
+
+def random_page(request):
+    entry_title = random.choice(util.list_entries())
+    return HttpResponseRedirect(reverse("wikititle", args=(entry_title,)))
