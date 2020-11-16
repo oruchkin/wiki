@@ -49,8 +49,10 @@ def save_page(request, title=None):
             # We are saving a new page
             title = request.POST['title']
             if title.lower() in [entry.lower() for entry in util.list_entries()]:
-                return render(request, "encyclopedia/error.html", 
-                )
+                return render(request, "encyclopedia/error.html", {
+                    "error_title": "saving page",
+                    "error_mgessae": "An entry with that title already exists! Please change the title and try again."
+                })
 
         filename = "entries/" + title + ".md"
         with open(filename, "w") as file:
