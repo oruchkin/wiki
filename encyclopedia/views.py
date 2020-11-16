@@ -13,8 +13,11 @@ def index(request):
     })
 
 def wikititle(request, title):
+    entry_contents = util.get_entry(title)
     return render(request, "encyclopedia/wiki.html", {
-        "entryname": util.get_entry(title)     
+        "entryname": util.get_entry(title),
+        "entry_exists": entry_contents is not None,
+        "title": title if entry_contents is not None else "Error",
     })
 
 
@@ -29,7 +32,11 @@ def search(request):
 })
 
 def newpage(request):
-    return render(request, "encyclopedia/newpage.html")
+    return render(request, "encyclopedia/newpage.html", {
+        'edit_mode': False,
+        'edit_page_title': '',
+        'edit_page_contents': ''
+    })
 
 
 def save_page(request, title=None):
@@ -57,7 +64,7 @@ def edit_page(request, title):
         # Somebody came to a url for editing a  page that does not exist
         return HttpResponseRedirect(reverse("index"))
 
-    return render(request, "encyclopedia/new-page.html", {
+    return render(request, "encyclopedia/newpage.html", {
         'edit_mode': True,
         'edit_page_title': title,
         'edit_page_contents': entry_contents
