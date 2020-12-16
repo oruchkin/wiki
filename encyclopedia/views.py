@@ -24,10 +24,11 @@ def wikititle(request, title):
 def search(request):
     query = request.GET['q']  # returns None if q not in GET
     if util.get_entry(query):
-        return HttpResponseRedirect(reverse("wikititle ", args=(query,)))
+        return HttpResponseRedirect(reverse("wikititle", args=(query,)))
     else:
         return render(request, "encyclopedia/index.html", {
             "entries": [wikititle for wikititle in util.list_entries() if query.lower() in wikititle.lower()],
+            
         
 })
 
@@ -47,7 +48,7 @@ def save_page(request, title=None):
         entry_content = request.POST['entry-content']
         if not title:
             # We are saving a new page
-            title = request.POST['title']
+            title = request.POST['title'] 
             if title.lower() in [entry.lower() for entry in util.list_entries()]:
                 return render(request, "encyclopedia/error.html", {
                     "error_title": "saving page",
@@ -71,6 +72,7 @@ def edit_page(request, title):
         'edit_page_title': title,
         'edit_page_contents': entry_contents
     })
+
 
 def random_page(request):
     entry_title = random.choice(util.list_entries())
