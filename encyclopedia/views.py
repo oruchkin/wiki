@@ -6,16 +6,7 @@ from django.urls import reverse
 from . import util
 import random
 import markdown2
-
-markdown2.markdown("*boo!*")  # or use `html = markdown_path(PATH)`
-u'<p><em>boo!</em></p>\n'
-
-from markdown2 import Markdown
-markdowner = Markdown()
-markdowner.convert("*boo!*")
-u'<p><em>boo!</em></p>\n'
-markdowner.convert("**boom!**")
-u'<p><strong>boom!</strong></p>\n'
+import re
 
 
 def index(request):
@@ -88,3 +79,5 @@ def edit_page(request, title):
 def random_page(request):
     entry_title = random.choice(util.list_entries())
     return HttpResponseRedirect(reverse("wikititle", args=(entry_title,)))
+
+

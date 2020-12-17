@@ -1,47 +1,46 @@
 {% extends "encyclopedia/layout.html" %}
 
 {% block title %}
-    Encyclopedia
+Encyclopedia
 {% endblock %}
 
 {% block body %}
-    <h1>Create a New Page</h1>
-    <form class="container" action={% if edit_mode %} "{% url 'save edited page' edit_page_title %}" {% else %} "
+<h1>Create a New Page</h1>
+<form class="container" action={% if edit_mode %} "{% url 'save edited page' edit_page_title %}" {% else %} "
         {% url 'save_page' %}" {% endif %} method="post">
 
-        
-        {% csrf_token %}
-        <div id="entry-title-section" class="row">
-            <div class="container">
-                <div class="row">
-                    <label for="title">Title of the wiki entry:</label>
-                </div>
 
-                <div class="row">
-                    <input name="title" placeholder="enter your entry title here..." id="title"
-                           value="{{ edit_page_title }}" {% if edit_mode %} disabled {% endif %} >
-                </div>
+    {% csrf_token %}
+    <div id="entry-title-section" class="row">
+        <div class="container">
+            <div class="row">
+                <label for="title">Title of the wiki entry:</label>
+            </div>
+
+            <div class="row">
+                <input name="title" placeholder="enter your entry title here..." id="title"
+                    value="{{ edit_page_title }}" {% if edit_mode %} disabled {% endif %}>
             </div>
         </div>
-        <div id="entry-body-section" class="row">
-            <div class="container">
-                <div class="row">
-                    <label for="entry-content">Wiki entry body content:</label>
-                </div>
+    </div>
+    <div id="entry-body-section" class="row">
+        <div class="container">
+            <div class="row">
+                <label for="entry-content">Wiki entry body content:</label>
+            </div>
 
-                <div class="row">
-                    <textarea placeholder="enter your entry contents in Markdown format here..."
-                                           name="entry-content" id="entry-content">{{ edit_page_contents }}</textarea>
-                </div>
+            <div class="row">
+                <textarea placeholder="enter your entry contents in Markdown format here..." name="entry-content"
+                    id="entry-content">{{ edit_page_contents }}</textarea>
             </div>
         </div>
-        <div id="entry-submit-button-section" class="row">
-            <input type="submit" value="save page">
-        </div>
+    </div>
+    <div id="entry-submit-button-section" class="row">
+        <input type="submit" value="save page">
+    </div>
 
 
 
-    </form>
-    
+</form>
+
 {% endblock %}
-
