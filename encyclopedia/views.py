@@ -5,8 +5,9 @@ from django.urls import reverse
 
 from . import util
 import random
+
 import markdown2
-import re
+from markdown2 import Markdown
 
 
 def index(request):
@@ -15,10 +16,12 @@ def index(request):
     })
 
 def wikititle(request, title):
+    markdowner = Markdown()
     entry_contents = util.get_entry(title)
     return render(request, "encyclopedia/wiki.html", {
         "entryname": util.get_entry(title),
-        "entry_exists": entry_contents is not None,
+        "entry_exists": entry_contents is not None, 
+        
         "title": title if entry_contents is not None else "Error",
     })
 

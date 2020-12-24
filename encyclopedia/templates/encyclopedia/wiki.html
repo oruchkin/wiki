@@ -16,6 +16,7 @@
         
         {% if entry_exists %}
                 <p><a href="{% url 'edit page' title %}">Edit this entry</a></p>
+                {{ entry|safe }}
         {% endif %}
     
    
