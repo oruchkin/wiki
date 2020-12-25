@@ -15,15 +15,44 @@ def index(request):
         "entries": util.list_entries()
     })
 
-def wikititle(request, title):
+#def wikititle(request, title): #старая версия
     markdowner = Markdown()
     entry_contents = util.get_entry(title)
     return render(request, "encyclopedia/wiki.html", {
-        "entryname": util.get_entry(title),
+        "entryname": markdowner.convert(entry_contents),
         "entry_exists": entry_contents is not None, 
         
         "title": title if entry_contents is not None else "Error",
     })
+
+#рабочая первая
+#def wikititle(request, title):
+    markdowner = Markdown()
+    entry_contents = util.get_entry(title)
+    return render(request, "encyclopedia/wiki.html", {
+        "entryname": util.get_entry(title),
+        "entry_exists": entry_contents is not None,
+
+        "title": title if entry_contents is not None else "Error",
+    })
+
+
+def wikititle(request, title): #новая версия
+    markdowner = Markdown()
+    entry_contents = util.get_entry(title)
+    if entry_contents is None:
+        return render(request, "encyclopedia/notfound404.html", {
+            "entryTitle": title,
+        })
+            
+    else:
+        return render(request, "encyclopedia/wiki.html", {
+            #"entryname2": util.get_entry(title),
+            "entryname": markdowner.convert(entry_contents),
+            #"title11": title if entry_contents is not None else "Error",
+            "entryTitle": title,
+        })
+
 
 
 def search(request):
