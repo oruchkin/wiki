@@ -1,6 +1,3 @@
 # Oleg
 
-Python is a programming language that can be used both for writing **command-line scripts** or building **web applications**.
-
-<img src="/entries/DISisME.jpg" alt="Dis">
-WHATS UP
+**Hi my name is Oleg**
